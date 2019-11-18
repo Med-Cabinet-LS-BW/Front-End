@@ -23,14 +23,14 @@ const NewLogin = ({values, errors, touched, status}) => {
         {touched.email && errors.email && <p>{errors.email}</p>}
         <Field type="password" name="password" autoComplete="off"/>
         {touched.password && errors.password && <p>{errors.password}</p>}
-        <button type="submit">Submit!</button>
+        <button type="submit">Submit</button>
       </Form>}
     </div>
     )
 }
 
 const FormikNewLogin = withFormik({
-  mapPropsToValues({name, email, password, tos}) {
+  mapPropsToValues({name, email, password}) {
     return {
       name: name || '',
       email: email || '',
@@ -48,7 +48,7 @@ const FormikNewLogin = withFormik({
     .then(response => {
       localStorage.setItem("token", response.data);
       setStatus(response.data);
-      console.log(response);
+      //console.log(response);
     })
     .catch(err => console.log(err.response));
     resetForm();
