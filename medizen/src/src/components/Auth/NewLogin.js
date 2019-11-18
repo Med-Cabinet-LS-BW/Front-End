@@ -12,6 +12,8 @@ const NewLogin = ({values, errors, touched, status}) => {
 
     return (
         <div>
+            {/* <p>Status: {status}</p> */}
+         {status ? "Logged In" :    
       <Form>
         <Field type="text" name="name" placeholder="name" />
         {touched.name && errors.name && (
@@ -20,24 +22,9 @@ const NewLogin = ({values, errors, touched, status}) => {
         <Field type="email" name="email" placeholder="email" />
         {touched.email && errors.email && <p>{errors.email}</p>}
         <Field type="password" name="password" autoComplete="off"/>
-        {/* <label className="checkbox-container">
-          Terms of Service
-          <Field
-            type="checkbox"
-            name="tos"
-            checked={values.tos}
-          />
-          <span className="checkmark" />
-        </label> */}
+        {touched.password && errors.password && <p>{errors.password}</p>}
         <button type="submit">Submit!</button>
-      </Form>
-      {/* {user.map(users => (
-        <ul key={users.id}>
-          <li>Name: {users.name}</li>
-          <li>Email: {users.email}</li>
-          <li>Signed TOS? - {values.tos ? "False" : "True"}</li>
-        </ul>
-      ))} */}
+      </Form>}
     </div>
     )
 }
@@ -48,16 +35,15 @@ const FormikNewLogin = withFormik({
       name: name || '',
       email: email || '',
       password: password || '',
-    //   tos: tos || false,
     };
   },
   validationSchema: Yup.object().shape({
     name: Yup.string().required(),
     email: Yup.string().required().email(),
     password: Yup.string().required('No Password Provided.').min(8, 'Password too short. 8 characters minimum.'),
-    // tos: Yup.boolean().required('Please check ToS box.').oneOf([true], 'Must accept Terms of Service.'),
   }),
   handleSubmit(values, {setStatus, resetForm}) {
+      //API location will need to be changed to reflect backend
     axios.post("http://localhost:5000/api/login/", values)
     .then(response => {
       localStorage.setItem("token", response.data);
