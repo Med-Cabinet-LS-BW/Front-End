@@ -1,5 +1,5 @@
 import React from 'react';
-import ViewToggle from '../HomePage/ViewToggle';
+import ViewToggle from './ViewToggle';
 
 
 import { makeStyles } from '@material-ui/core/styles';
