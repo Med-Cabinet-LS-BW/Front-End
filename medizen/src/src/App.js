@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/Auth/PrivateRoute";
-import Login from "./components/Auth/Login";
+import NewLogin from "./components/Auth/NewLogin";
 import Header from './components/Layouts/Header';
 import ViewToggle from './components/HomePage/ViewToggle';
 import Footer from './components/Layouts/Footer';
@@ -16,7 +16,7 @@ const  App = () => {
           <PrivateRoute path="/StrainList">
             <ViewToggle />
           </PrivateRoute>
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={NewLogin} />
       </Switch>
 
     </div>
