@@ -1,6 +1,6 @@
 import React from 'react';
-import  { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import  { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 
 
 function Header () {
@@ -11,6 +11,11 @@ function Header () {
           <Typography variant="h6" >
             MediZen
           </Typography>
+
+          <nav>
+            <NavLink className='nav-links' to='/register'>Register</NavLink>
+            <NavLink className='nav-links' to='/login'>Login</NavLink>
+          </nav>
         </Toolbar>
       </AppBar>
     )

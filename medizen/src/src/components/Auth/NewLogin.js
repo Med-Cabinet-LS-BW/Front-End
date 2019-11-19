@@ -12,14 +12,17 @@ const NewLogin = ({values, errors, touched, status}) => {
 
     return (
         <div>
-         {status ? "Logged In" :    
+         {status ? "Logged In" : 
+         <> 
+          <h2>Login Below</h2>  
       <Form>
         <Field type="email" name="email" placeholder="email" />
         {touched.email && errors.email && <p>{errors.email}</p>}
-        <Field type="password" name="password" autoComplete="off"/>
+        <Field type="password" placeholder="password" name="password" autoComplete="off"/>
         {touched.password && errors.password && <p>{errors.password}</p>}
         <button type="submit">Submit</button>
-      </Form>}
+      </Form>
+      </>}
     </div>
     )
 }
@@ -38,9 +41,9 @@ const FormikNewLogin = withFormik({
   handleSubmit(values, {setStatus, resetForm}) {
     axios.post("https://medizen-api.herokuapp.com/api/auth/login", values)
     .then(response => {
-      localStorage.setItem("token", response.data);
+      localStorage.setItem("token", response.data.token);
       setStatus(response.data);
-      console.log(response);
+      //console.log(response.data.token);
     })
     .catch(err => console.log(err.response));
     resetForm();
