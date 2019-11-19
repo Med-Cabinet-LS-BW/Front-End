@@ -15,10 +15,10 @@ const Register = ({values, errors, touched, status}) => {
         <div>
             <p>Register Below</p>
             <Form>
-                <Field type="text" name="name" placeholder="name" />
+                {/* <Field type="text" name="name" placeholder="name" />
                 {touched.name && errors.name && (
                     <p>{errors.name}</p>
-                )}
+                )} */}
                 <Field type="email" name="email" placeholder="email" />
                 {touched.email && errors.email && <p>{errors.email}</p>}
                 <Field type="password" name="password" autoComplete="off" />
@@ -32,21 +32,22 @@ const Register = ({values, errors, touched, status}) => {
 }
 
 const FormikRegister = withFormik({
-    mapPropsToValues({name, email, password}) {
+    mapPropsToValues({email, password}) {
         return {
-            name: name || '',
+            // name: name || '',
             email: email || '',
             password: password || '',
         };
     },
     validationSchema: Yup.object().shape({
-        name: Yup.string().required(),
+        // name: Yup.string().required(),
         email: Yup.string().required().email(),
         password: Yup.string().required('No Password Provided.').min(8, 'Password too short. 8 characters minimum.'),
     }),
     handleSubmit(values, {setStatus, resetForm}) {
-        axios.post("http://localhost:5000/api/login/", values)
+        axios.post("https://medizen-api.herokuapp.com/api/auth/register", values)
         .then(response => {
+            console.log(response);
             localStorage.setItem("token", response.data);
             setStatus(response.data);
         })
