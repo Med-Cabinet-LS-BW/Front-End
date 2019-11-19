@@ -8,13 +8,7 @@ import ViewToggle from './components/HomePage/ViewToggle';
 //import Footer from './components/Layouts/Footer';
 import './App.css';
 
-
-
 const  App = () => {
-
-  const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem('token') ? true : false
-    );
 
   return(
     <Router>
