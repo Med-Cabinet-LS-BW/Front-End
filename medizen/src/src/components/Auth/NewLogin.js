@@ -1,18 +1,19 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import { Route, Redirect } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 const NewLogin = ({values, errors, touched, status}) => {
-    const [user, setUser] = useState([]);
+    const [userState, setUserState] = useState([]);
 
     useEffect(() => {
-        status && setUser(user => [...user, status]);
-    }, [status])
+        status && setUserState(user => [...user, status]);
+    }, [])
 
     return (
         <div>
-         {status ? "Logged In" : 
+         {status ? <Redirect to={{ pathname: "/StrainList" }} /> : 
          <> 
           <h2>Login Below</h2>  
       <Form>

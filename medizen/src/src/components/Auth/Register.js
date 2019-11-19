@@ -19,7 +19,7 @@ const Register = ({values, errors, touched, status}) => {
                 <Field type="email" name="email" placeholder="email" />
                 {touched.email && errors.email && <p>{errors.email}</p>}
                 <Field type="date" name="birthDate" />
-                {/* Validation */}
+                {touched.date && errors.date && <p>{errors.date}</p>}
                 <Field type="password" placeholder="password" name="password" autoComplete="off" />
                 {touched.password && errors.password && <p>{errors.password}</p>}
                 <Field type="password" name="confirmPassword" placeholder="confirm password" autoComplete="off" />
@@ -48,7 +48,8 @@ const FormikRegister = withFormik({
     handleSubmit(values, {setStatus, resetForm}) {
         axios.post("https://medizen-api.herokuapp.com/api/auth/register", values)
         .then(response => {
-            console.log(response.data);
+            // console.log(response.data);
+            // console.log(response.data.token);
             localStorage.setItem("token", response.data.token);
             setStatus(response.data);
         })
