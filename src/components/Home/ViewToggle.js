@@ -22,7 +22,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Types from '../Filter/Types';
 import Tastes from '../Filter/Tastes';
 import Effects from '../Filter/Effects';
-import TreatmentPlans from '../Treatments/TreatmentPlans';
+import Treatments from '../Treatments/TreatmentPlans';
 
 
 
@@ -132,9 +132,9 @@ export default function FullWidthTabs() {
         <ViewToggle value={value} index={1} dir={theme.direction}>
           Favorites
         </ViewToggle>
-       <ViewToggle value={value} index={2} dir={theme.direction}>
-          <TreatmentPlans/>
-        </ViewToggle>
+       {/* <ViewToggle value={value} index={2} dir={theme.direction}>
+          <Treatments/>
+        </ViewToggle> */}
       </SwipeableViews>
    
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

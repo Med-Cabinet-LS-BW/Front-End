@@ -1,9 +1,9 @@
-import React from 'react';
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { FormControlLabel, CardHeader,  } from '@material-ui/core';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,8 +11,9 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Checkbox from '@material-ui/core/Checkbox';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import {FavoriteBorder, Favorite } from '@material-ui/icons';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
@@ -40,73 +41,102 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-const StrainCard = props =>  {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+class Strain extends React.Component  {
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+     const title = this.getTitle.value;
+     const message = this.getMessage.value;
+     const data = {
+       // TODO --- the object returned should say favorite: true
+      id: new Date(),
+      title,
+      message,
+      editing: false
+     }
+     this.props.dispatch({
+     type: 'ADD_STRAIN',
+     data
+     })
+     this.getTitle.value = '';
+     this.getMessage.value = '';
+    }
 
+  // const classes = useStyles();
+  // const [expanded, setExpanded] = React.useState(false);
+
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
+
+
+  render () {
   return (
-    <Card className={classes.card}>
+    
+    <Card>
+      <h1 title={this.props.strain}/>
       <CardHeader
         
         action={
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
+          <form>
+          <FormControlLabel
+          control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} value="checkedH" />}
+          label="Custom icon"
+          onSubmit={this.handleSubmit}
+        /></form>
         }
-        title={props.name}
+        
       
       />
       <CardMedia
-        className={classes.media}
-        title={props.name}
+        // className={classes.media}
+        title={this.props.description}
       />
       
       <CardContent>
         <Typography paragraph>Type:</Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.type}
+          {this.props.type}
         </Typography>
         <Typography paragraph>Effects:</Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.effects}
+          {this.props.effects}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
           <Avatar aria-label="strain">
             <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
+          // className={clsx(classes.expand, {
+          //   [classes.expandOpen]: expanded,
+          // })}
+          // onClick={handleExpandClick}
+          // aria-expanded={expanded}
           aria-label="show more"
         >
           <ExpandMoreIcon />
         </IconButton>
           </Avatar>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse 
+      // in={expanded} 
+      timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Flavor:</Typography>
           <Typography paragraph>
-            {props.flavor}
+            {this.props.flavors}
           </Typography>
           <Typography paragraph>
-            {props.description}
+            {this.props.description}
           </Typography>
           <Typography>
-            Review this strand.
+            {/* Review this strand. */}
           </Typography>
         </CardContent>
       </Collapse>
     </Card>
   );
-}
-export default StrainCard;
+}}
+export default Strain;
 
    // {
     //   id: number,
