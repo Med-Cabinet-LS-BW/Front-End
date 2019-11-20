@@ -45,7 +45,7 @@ const Favorites = (props) => {
       axiosWithAuth().get('https://medizen-api.herokuapp.com/api/favorites/strains')
       .then(response => {
         console.log(response);
-        setStrains(response);
+        setStrains(response.data);
       })
       .catch(err => {console.log('no data returned', err)});
     }, [])

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -44,25 +44,41 @@ const StrainCard = props =>  {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
+  const axiosWithAuth = () => {
+    return axios.create({
+        headers: {
+            authorization: localStorage.getItem("token")
+        }
+    });
+  };
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
     <Card className={classes.card}>
+      {console.log(props)}
       <CardHeader
-        
         action={
-        <IconButton aria-label="add to favorites">
+          <IconButton aria-label="add to favorites"  onClick={()=> {
+              axiosWithAuth().post('https://medizen-api.herokuapp.com/api/favorites/strains', {
+                strain_id: props.strain_id
+              })
+              .then(response => {
+                console.log(response);
+              })
+              .catch(err => {console.log(err)})
+            }}>
           <FavoriteIcon />
         </IconButton>
         }
-        title={props.name}
+        title={props.strain}
       
       />
       <CardMedia
         className={classes.media}
-        title={props.name}
+        title={props.strain}
       />
       
       <CardContent>
@@ -93,7 +109,7 @@ const StrainCard = props =>  {
         <CardContent>
           <Typography paragraph>Flavor:</Typography>
           <Typography paragraph>
-            {props.flavor}
+            {props.flavors}
           </Typography>
           <Typography paragraph>
             {props.description}
