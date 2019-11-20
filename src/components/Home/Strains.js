@@ -12,7 +12,7 @@ const axiosWithAuth = () => {
     });
 };
 
-class StrainList extends React.Component {
+class Strains extends React.Component {
         state = {
         strains: []
       }
@@ -29,7 +29,7 @@ class StrainList extends React.Component {
 
 
     getData = () => {
-        axiosWithAuth().get("http://medizen-api.herokuapp.com/api/auth/strains", {
+        axiosWithAuth().get("https://medizen-api.herokuapp.com/api/auth/strains", {
           headers: { authorization: localStorage.getItem("token") }
         })
          
@@ -71,7 +71,7 @@ class StrainList extends React.Component {
 
 
 
-    export default StrainList;
+    export default Strains;
 
 
 

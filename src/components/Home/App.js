@@ -4,7 +4,6 @@ import PrivateRoute from "../Auth/PrivateRoute";
 import Login from "../Auth/Login";
 import Header from '../Layouts/Header';
 import ViewToggle from './ViewToggle';
-import Footer from '../Layouts/Footer';
 import '../../App.css';
 
 const  App = () => {
@@ -16,9 +15,6 @@ const  App = () => {
         <Switch>
             <ViewToggle/>
             <PrivateRoute path="/" component={ViewToggle}/>
-            <PrivateRoute path="/Types" component={Types}/>
-            <PrivateRoute path="/Effects" component={Effects}/>
-            <PrivateRoute path="/Flavors" component={Flavors}/>
         </Switch>
 
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import StrainList from './StrainList';
+import Strains from './Strains';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -10,12 +10,21 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { grey } from '@material-ui/core/colors';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Types from '../Filter/Types';
+import Tastes from '../Filter/Tastes';
+import Effects from '../Filter/Effects';
+import TreatmentPlans from '../Treatments/TreatmentPlans';
+
+
 
 
 
@@ -62,6 +71,10 @@ const useStyles = makeStyles(theme => ({
   extendedIcon: {
     marginRight: theme.spacing(1),
   },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
 }));
 
 export default function FullWidthTabs() {
@@ -99,47 +112,92 @@ export default function FullWidthTabs() {
         >
           <Tab label="Discover" {...a11yProps(0)} />
           <Tab label="Favorites" {...a11yProps(1)} />
+          <Tab label="Treatments" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
+
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
-      >
+      > 
+      
         <ViewToggle value={value} index={0} dir={theme.direction}>
             Strains
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            <Button color="primary" onClick={handleClickOpen}>
             Filter      
             </Button>    
-            <StrainList /> 
+            <Strains /> 
         </ViewToggle>
         <ViewToggle value={value} index={1} dir={theme.direction}>
           Favorites
         </ViewToggle>
+       <ViewToggle value={value} index={2} dir={theme.direction}>
+          <TreatmentPlans/>
+        </ViewToggle>
       </SwipeableViews>
    
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Filter</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
+            Filter Strains by Type, Effect and Taste.
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
+
+          <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>Type</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+            <Types/>
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography className={classes.heading}>Effect</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+           <Effects/>
+                </Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+
+
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel3a-content"
+                id="panel3a-header"
+              >
+                <Typography className={classes.heading}>Taste</Typography>
+              </ExpansionPanelSummary>
+            
+            <ExpansionPanelDetails>
+          <Typography>
+           <Tastes/>
+                </Typography>
+              </ExpansionPanelDetails>
+              </ExpansionPanel>
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
           <Button onClick={handleClose} color="primary">
-            Subscribe
+            Update
           </Button>
         </DialogActions>
       </Dialog>

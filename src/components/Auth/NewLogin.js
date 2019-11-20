@@ -13,7 +13,7 @@ const NewLogin = ({values, errors, touched, status}) => {
 
     return (
         <div>
-         {status ? <Redirect to={{ pathname: "/StrainList" }} /> : 
+         {status ? <Redirect to={{ pathname: "/Strains" }} /> : 
          <> 
           <h2>Login Below</h2>  
       <Form>
