@@ -9,6 +9,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { grey } from '@material-ui/core/colors';
+import Favorites from "../Strain/Favorites";
 
 function ViewToggle(props) {
   const { children, value, index, ...other } = props;
@@ -87,6 +88,7 @@ export default function FullWidthTabs() {
         </ViewToggle>
         <ViewToggle value={value} index={1} dir={theme.direction}>
           Favorites
+          <Favorites />
         </ViewToggle>
       </SwipeableViews>
     </div>
