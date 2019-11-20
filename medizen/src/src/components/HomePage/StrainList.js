@@ -1,5 +1,5 @@
 import React from 'react';
-import ViewToggle from '../HomePage/ViewToggle';
+//import ViewToggle from '../HomePage/ViewToggle';
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,12 +8,12 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
+//import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
+//import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { green } from '@material-ui/core/colors';
+//import { green } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    color: green,
+    color: 'green',
   },
 }));
 
@@ -81,7 +81,7 @@ export default function StrainList() {
         title="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="green" component="p">
+        <Typography variant="body2" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook together with your
           guests. 
         </Typography>
