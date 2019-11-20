@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 
 function Header () {
+
     return (
         <AppBar position="static">
         <Toolbar>
@@ -11,7 +12,6 @@ function Header () {
           <Typography variant="h6" >
             MediZen
           </Typography>
-
           <nav>
             <NavLink className='nav-links' to='/register'>Register</NavLink>
             <NavLink className='nav-links' to='/login'>Login</NavLink>

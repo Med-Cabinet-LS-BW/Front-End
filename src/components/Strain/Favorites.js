@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
+import axios from 'axios';
+import StrainCard from "../HomePage/StrainCard";
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -29,13 +31,35 @@ const useStyles = makeStyles(theme => ({
 
 const Favorites = (props) => {
 
+  const axiosWithAuth = () => {
+    return axios.create({
+        headers: {
+            authorization: localStorage.getItem("token")
+        }
+    });
+};
 
+    const [strains, setStrains] = useState([])
+
+    useEffect(() => {
+      axiosWithAuth().get('https://medizen-api.herokuapp.com/api/favorites/strains')
+      .then(response => {
+        console.log(response);
+        setStrains(response);
+      })
+      .catch(err => {console.log('no data returned', err)});
+    }, [])
 
     return (
         <div>
-            <ul>
-                <li></li>
-            </ul>
+            {strains.map(strain => <StrainCard
+              key={strain.strain_id}
+              name={strain.strain}
+              type={strain.type}
+              effects={strain.effects}
+              flavor={strain.flavors}
+              description={strain.description}
+              />)}
         </div>
     )
 }

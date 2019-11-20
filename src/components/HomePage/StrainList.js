@@ -1,11 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD:medizen/src/components/HomePage/StrainList.js
-//import ViewToggle from '../HomePage/ViewToggle';
-=======
 import ViewToggle from './ViewToggle';
->>>>>>> 263614b1b3c33cac668090339f6b0ba5b20ada1d:src/components/HomePage/StrainList.js
-
-
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
