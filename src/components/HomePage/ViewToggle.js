@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 import StrainList from './StrainList';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
@@ -9,7 +10,15 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { grey } from '@material-ui/core/colors';
-import Favorites from "../Strain/Favorites";
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+
+
 
 function ViewToggle(props) {
   const { children, value, index, ...other } = props;
@@ -47,12 +56,27 @@ const useStyles = makeStyles(theme => ({
     margin: '0, auto',
     width: '100%',
   },
+  fab: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
 }));
 
 export default function FullWidthTabs() {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -84,13 +108,41 @@ export default function FullWidthTabs() {
       >
         <ViewToggle value={value} index={0} dir={theme.direction}>
             Strains
-          <StrainList/>
+            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            Filter      
+            </Button>    
+            <StrainList /> 
         </ViewToggle>
         <ViewToggle value={value} index={1} dir={theme.direction}>
           Favorites
-          <Favorites />
         </ViewToggle>
       </SwipeableViews>
+   
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here. We will send updates
+            occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
-  );
-} 
+  )
+  }

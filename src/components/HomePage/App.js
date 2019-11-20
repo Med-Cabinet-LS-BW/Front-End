@@ -10,16 +10,18 @@ import '../../App.css';
 const  App = () => {
   return(
     <Router>
-    <div>
-      <Header />
-      <Switch>
-          <PrivateRoute path="/StrainList">
-            <ViewToggle />
-          </PrivateRoute>
-          <Route path="/login" component={Login} />
-      </Switch>
+      <div>
+        <Header />
+        <Route path="/login" component={Login} />
+        <Switch>
+            <ViewToggle/>
+            <PrivateRoute path="/" component={ViewToggle}/>
+            <PrivateRoute path="/Types" component={Types}/>
+            <PrivateRoute path="/Effects" component={Effects}/>
+            <PrivateRoute path="/Flavors" component={Flavors}/>
+        </Switch>
 
-    </div>
+      </div>
     </Router>
   )
  
