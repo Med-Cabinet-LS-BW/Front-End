@@ -1,10 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+    font-family: 'Quicksand', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+.form-error {
+  color: #D61200;
+}
+
+.form-style {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-fields {
+  margin: 10px 0;
+}
+
+label {
+  display: block;
+  font-size: 18px;
 }
 
 code {
@@ -18,4 +66,28 @@ nav {
 
 nav a {
   margin-right: 10px;
+}
+
+.strain-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hide-btn {
+  display: none;
+}
+
+.MuiToolbar-root {
+  color: #fff;
+  background-color: #3d8f6d;
+}
+
+nav a{
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.strain-cards .MuiTypography-paragraph {
+  margin-bottom: 5px;
 }
