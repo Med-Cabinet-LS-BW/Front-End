@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import  { AppBar, Toolbar, Typography } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import { green, grey } from '@material-ui/core/colors';
+
+
+import { NavLink, Redirect } from 'react-router-dom';
 
 
 const theme = createMuiTheme({
@@ -17,6 +16,12 @@ const theme = createMuiTheme({
 });
 
 function Header () {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem('token') ? true : false
+  );
+
+ 
     return (
       <ThemeProvider>
         <AppBar color="primary" position="static">
@@ -25,11 +30,22 @@ function Header () {
           <Typography variant="h6" >
             MediZen
           </Typography>
-
+          {isLoggedIn 
+          ?
           <nav>
+            {console.log(isLoggedIn)}
+            <NavLink onClick={() => {
+              setIsLoggedIn(false);
+              localStorage.removeItem('token');
+            }} to="/login">Logout</NavLink>
+          </nav>
+          :
+          <nav>
+            {console.log(isLoggedIn)}
             <NavLink className='nav-links' to='/register'>Register</NavLink>
             <NavLink className='nav-links' to='/login'>Login</NavLink>
           </nav>
+          }
         </Toolbar>
       </AppBar>
     </ThemeProvider>
