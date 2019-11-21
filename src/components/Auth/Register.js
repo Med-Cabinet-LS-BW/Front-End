@@ -3,6 +3,7 @@ import axios from "axios";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import moment from 'moment';
+import {Redirect} from "react-router-dom";
 
 const Register = ({values, errors, touched, status}) => {
 
@@ -13,17 +14,25 @@ const Register = ({values, errors, touched, status}) => {
     }, [status])
 
     return (
-        <div>
-            <h2>Register Below</h2>
-            <Form>
-                <Field type="email" name="email" placeholder="email" />
-                {touched.email && errors.email && <p>{errors.email}</p>}
+        <div className="form-style">
+            <h2>Sign Up</h2>
+            <Form className="form-style">
+                <div className='form-fields'>
+                <label htmlFor="email">Email</label>
+                <Field type="email" name="email" />
+                {touched.email && errors.email && <p className='form-error'>{errors.email}</p>}</div>
+                <div className='form-fields'>
+                <label htmlFor="password">Password</label>
+                <Field type="password" name="password" autoComplete="off" />
+                {touched.password && errors.password && <p className='form-error'>{errors.password}</p>}</div>
+                <div className='form-fields'>
+                <label htmlFor="confirmPassword">Confirm</label>
+                <Field type="password" name="confirmPassword" autoComplete="off" />
+                {touched.confirmPassword && errors.confirmPassword && <p className='form-error'>{errors.confirmPassword}</p>}</div>
+                <div className='form-fields'>
+                <label htmlFor="birthDate">Birthdate</label>
                 <Field type="date" name="birthDate" />
-                {touched.date && errors.date && <p>{errors.date}</p>}
-                <Field type="password" placeholder="password" name="password" autoComplete="off" />
-                {touched.password && errors.password && <p>{errors.password}</p>}
-                <Field type="password" name="confirmPassword" placeholder="confirm password" autoComplete="off" />
-                {touched.confirmPassword && errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                {touched.date && errors.date && <p className='form-error'>{errors.date}</p>}</div>
                 <button type="submit">Submit</button>
             </Form>
         </div>
@@ -31,6 +40,7 @@ const Register = ({values, errors, touched, status}) => {
 }
 
 const FormikRegister = withFormik({
+    
     mapPropsToValues({email, password, confirmPassword, birthDate}) {
         return {
             email: email || '',
@@ -40,9 +50,9 @@ const FormikRegister = withFormik({
         };
     },
     validationSchema: Yup.object().shape({
-        email: Yup.string().required().email(),
-        password: Yup.string().required('No Password Provided.').min(8, 'Password too short. 8 characters minimum.'),
-        confirmPassword: Yup.string().required().label('Confirm Password').test('passwords-match', 'Passwords must match.', function(e) {return this.parent.password === e;}),
+        email: Yup.string().required('Required.').email(),
+        password: Yup.string().required('No Password Provided.').min(8, 'Password must be 8 characters.'),
+        confirmPassword: Yup.string().required('Required.').label('Confirm Password').test('passwords-match', 'Passwords must match.', function(e) {return this.parent.password === e;}),
         birthDate: Yup.string().test('good-date', 'You must be 21 years old to register an account', value => {return moment().diff(moment(value), 'years') >= 21})
     }),
     handleSubmit(values, {setStatus, resetForm}) {
@@ -52,6 +62,7 @@ const FormikRegister = withFormik({
             // console.log(response.data.token);
             localStorage.setItem("token", response.data.token);
             setStatus(response.data);
+            let isLoggedIn = true;
         })
         .catch(err => console.log(err.response));
         resetForm();

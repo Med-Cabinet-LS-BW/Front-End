@@ -18,7 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles(theme => ({
     card: {
-      width: 345,
+      width: 300,
       margin: 50
     },
     media: {
@@ -58,17 +58,17 @@ const StrainCard = props =>  {
 
   return (
     <Card className={classes.card}>
-      {console.log(props)}
+      {/* {console.log(props)} */}
       <CardHeader
         action={
           <IconButton aria-label="add to favorites"  onClick={()=> {
               axiosWithAuth().post('https://medizen-api.herokuapp.com/api/favorites/strains', {
                 strain_id: props.strain_id
               })
-              .then(response => {
-                console.log(response);
-              })
-              .catch(err => {console.log(err)})
+              // .then(response => {
+              //   //console.log(response);
+              // })
+              // .catch(err => {console.log(err)})
             }}>
           <FavoriteIcon />
         </IconButton>
@@ -82,10 +82,9 @@ const StrainCard = props =>  {
       /> */}
       
       <CardContent>
-        <Typography paragraph>Type: {props.type}</Typography>
-        <Typography paragraph>Effects: {props.effects.map(element => {
-          return `${element} `
-        })}</Typography>
+        <Typography paragraph>Type: {props.type[0].toUpperCase() + props.type.slice(1)}</Typography>
+
+        <Typography paragraph>{`Effects: ${props.effects.join(', ')}`}</Typography>
       </CardContent>
       <CardActions disableSpacing>
           <Avatar aria-label="strain">
@@ -103,11 +102,7 @@ const StrainCard = props =>  {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-        <Typography paragraph>Flavor: {
-          props.flavor.map(element => {
-            return `${element} `
-          })
-        }</Typography>
+          <Typography paragraph>{`Flavor: ${props.flavor.join(', ')}`} </Typography>
           <Typography paragraph>
             {props.description}
           </Typography>

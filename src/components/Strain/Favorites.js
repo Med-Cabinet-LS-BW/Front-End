@@ -6,7 +6,7 @@ import StrainCard from "../HomePage/StrainCard";
 
 const useStyles = makeStyles(theme => ({
     card: {
-      maxWidth: 345,
+      maxWidth: 300,
       height: '1%',
       margin: '10%',
     },
@@ -52,7 +52,8 @@ const Favorites = (props) => {
 
     return (
         <div className="strain-cards">
-            {strains.map(strain => <StrainCard
+            {strains.map(strain =>
+            <StrainCard
               key={strain.strain_id}
               name={strain.strain}
               type={strain.type}

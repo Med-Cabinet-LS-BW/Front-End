@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import { Route, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 
@@ -9,7 +9,7 @@ const NewLogin = ({values, errors, touched, status}) => {
 
     useEffect(() => {
         status && setUserState(user => [...user, status]);
-    }, [])
+    }, [status])
 
     return (
         <div>
@@ -29,6 +29,7 @@ const NewLogin = ({values, errors, touched, status}) => {
 }
 
 const FormikNewLogin = withFormik({
+  
   mapPropsToValues({email, password}) {
     return {
       email: email || '',
@@ -44,7 +45,7 @@ const FormikNewLogin = withFormik({
     .then(response => {
       localStorage.setItem("token", response.data.token);
       setStatus(response.data);
-      //console.log(response.data.token);
+      let isLoggedIn = true;
     })
     .catch(err => console.log(err.response));
     resetForm();
