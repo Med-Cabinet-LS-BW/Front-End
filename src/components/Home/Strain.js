@@ -12,9 +12,11 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
-import { red } from '@material-ui/core/colors';
-import {FavoriteBorder, Favorite } from '@material-ui/icons';
+import { green } from '@material-ui/core/colors';
+import { FavoriteIcon } from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import axios from 'axios';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -37,18 +39,33 @@ const useStyles = makeStyles(theme => ({
       transform: 'rotate(180deg)',
     },
     avatar: {
-      backgroundColor: red[500],
+      backgroundColor: green[500],
     },
   }));
 
-class Strain extends React.Component  {
+  const axiosWithAuth = () => {
+    return axios.create({
+        headers: {
+            authorization: localStorage.getItem("token")
+        }
+    });
+};
 
-  handleSubmit = (e) => {
+  const Strain = props =>  {
+    
+    const classes = useStyles();
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+      setExpanded(!expanded);
+    };
+
+
+ const handleSubmit = (e) => {
     e.preventDefault();
      const title = this.getTitle.value;
      const message = this.getMessage.value;
      const data = {
-       // TODO --- the object returned should say favorite: true
       id: new Date(),
       title,
       message,
@@ -62,89 +79,69 @@ class Strain extends React.Component  {
      this.getMessage.value = '';
     }
 
-  // const classes = useStyles();
-  // const [expanded, setExpanded] = React.useState(false);
+   
 
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
+return (
 
-
-  render () {
-  return (
-    
-    <Card>
-      <h1 title={this.props.strain}/>
+<Card className={classes.card}>
+      {/* {console.log(props)}
       <CardHeader
-        
         action={
-          <form>
-          <FormControlLabel
-          control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} value="checkedH" />}
-          label="Custom icon"
-          onSubmit={this.handleSubmit}
-        /></form>
+          <IconButton aria-label="add to favorites"  onClick={()=> {
+              axiosWithAuth().post('https://medizen-api.herokuapp.com/api/favorites/strains', {
+                strain_id: props.strain_id
+              })
+              .then(response => {
+                console.log(response);
+              })
+              .catch(err => {console.log(err)})
+            }}>
+          <FavoriteIcon />
+        </IconButton>
         }
-        
+        title={props.name}
       
-      />
-      <CardMedia
-        // className={classes.media}
-        title={this.props.description}
-      />
+      /> */}
+     
       
       <CardContent>
-        <Typography paragraph>Type:</Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {this.props.type}
-        </Typography>
-        <Typography paragraph>Effects:</Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {this.props.effects}
-        </Typography>
+        <Typography paragraph>Type: {props.type}</Typography>
+        <Typography paragraph>Effects: {props.effects.map(element => {
+          return `${element} `
+        })}</Typography>
       </CardContent>
       <CardActions disableSpacing>
           <Avatar aria-label="strain">
             <IconButton
-          // className={clsx(classes.expand, {
-          //   [classes.expandOpen]: expanded,
-          // })}
-          // onClick={handleExpandClick}
-          // aria-expanded={expanded}
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
           aria-label="show more"
         >
           <ExpandMoreIcon />
         </IconButton>
           </Avatar>
       </CardActions>
-      <Collapse 
-      // in={expanded} 
-      timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Flavor:</Typography>
+        <Typography paragraph>Flavor: {
+          props.flavor.map(element => {
+            return `${element} `
+          })
+        }</Typography>
           <Typography paragraph>
-            {this.props.flavors}
+            {props.description}
           </Typography>
-          <Typography paragraph>
-            {this.props.description}
-          </Typography>
-          <Typography>
-            {/* Review this strand. */}
-          </Typography>
+         
         </CardContent>
       </Collapse>
     </Card>
-  );
-}}
-export default Strain;
+)
+  }
 
-   // {
-    //   id: number,
-    //   strain_id: number,
-    //   strain: string,
-    //   type: string,
-    //   rating: float,
-    //   description: string,
-    //   effects: array,
-    //   flavors: array
-    // }
+  export default connect()(Strain);
+
+
+
