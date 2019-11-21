@@ -19,3 +19,12 @@ nav {
 nav a {
   margin-right: 10px;
 }
+
+.strain-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hide-btn {
+  display: none;
+}

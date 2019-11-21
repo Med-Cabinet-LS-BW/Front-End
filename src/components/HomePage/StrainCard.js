@@ -73,23 +73,19 @@ const StrainCard = props =>  {
           <FavoriteIcon />
         </IconButton>
         }
-        title={props.strain}
+        title={props.name}
       
       />
-      <CardMedia
+      {/* <CardMedia
         className={classes.media}
-        title={props.strain}
-      />
+        title={props.name}
+      /> */}
       
       <CardContent>
-        <Typography paragraph>Type:</Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.type}
-        </Typography>
-        <Typography paragraph>Effects:</Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.effects}
-        </Typography>
+        <Typography paragraph>Type: {props.type}</Typography>
+        <Typography paragraph>Effects: {props.effects.map(element => {
+          return `${element} `
+        })}</Typography>
       </CardContent>
       <CardActions disableSpacing>
           <Avatar aria-label="strain">
@@ -107,16 +103,17 @@ const StrainCard = props =>  {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Flavor:</Typography>
-          <Typography paragraph>
-            {props.flavors}
-          </Typography>
+        <Typography paragraph>Flavor: {
+          props.flavor.map(element => {
+            return `${element} `
+          })
+        }</Typography>
           <Typography paragraph>
             {props.description}
           </Typography>
-          <Typography>
+          {/* <Typography>
             Review this strand.
-          </Typography>
+          </Typography> */}
         </CardContent>
       </Collapse>
     </Card>

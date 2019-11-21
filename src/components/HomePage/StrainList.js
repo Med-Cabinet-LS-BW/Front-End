@@ -57,7 +57,7 @@ class StrainList extends React.Component {
     render() {
  
       return (
-          <div className='wrap' >
+          <div className='strain-cards'>
               {this.state.strains.map(strain => <StrainCard
                 key={strain.strain_id}
                 strain_id={strain.strain_id}
@@ -65,7 +65,7 @@ class StrainList extends React.Component {
                 type={strain.type}
                 effects={strain.effects}
                 flavor={strain.flavors}
-                description={strain.description}/>    
+                description={strain.description}/>
               )}
           </div>
       )}
