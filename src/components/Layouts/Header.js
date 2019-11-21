@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import  { AppBar, Toolbar, Typography } from '@material-ui/core';
+
+
 import { NavLink, Redirect } from 'react-router-dom';
 
-//let isLoggedIn = false;
 
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: green[600] }, // Purple and green play nicely together.
+    secondary: { main: grey[50] }, // This is just green.A700 as hex.
+  },
+  typography: {
+    fontFamily: 'quicksand'
+  },
+});
 
 function Header () {
 
@@ -11,18 +21,10 @@ function Header () {
     localStorage.getItem('token') ? true : false
   );
 
-  // if (localStorage.getItem('token')) {
-  //   setIsLoggedIn(true);
-  // }
-
-  // useEffect(() => {
-  //   if (!localStorage.getItem('token')) {
-  //     setIsLoggedIn(true);
-  //   }
-  // })
-
+ 
     return (
-        <AppBar position="static">
+      <ThemeProvider>
+        <AppBar color="primary" position="static">
         <Toolbar>
           
           <Typography variant="h6" >
@@ -46,6 +48,7 @@ function Header () {
           }
         </Toolbar>
       </AppBar>
+    </ThemeProvider>
     )
       
   }

@@ -1,38 +1,8 @@
 import React, { Component } from 'react';
-import { Connect } from 'react-redux';
+import { connect } from 'react-redux';
 import Strain from './Strain';
 import axios from 'axios';
 import EditStrain from './EditStrain';
-
-// TODO    ---- RENAME STRAINCARD FILE TO STRAIN ------
-// TODO    ---- Fix EditStrain element below ------
-// TODO    ---- Uncomment EditStrain import and fix the address ------
-
-
-
-
-// class AllStrains extends Component {
-// render() {
-// return (
-// <div>
-//   <h1 className="post_heading">Strains</h1>
-//   {this.props.strains.map((strain) => (
-//   <div key={strain.id}>
-//     {strain.editing ? <EditComponent strain={strain} key={strain.id} /> : <Strain strain={strain}
-//     key={strain.id} />}
-//   </div>
-// ))}
-// </div>
-// );
-// }
-// }
-
-// const mapStateToProps = (state) => {
-// return {
-// strains: state
-// }
-// }
-// export default connect(mapStateToProps)(AllStrains);
 
 
 const axiosWithAuth = () => {
@@ -61,7 +31,6 @@ class Strains extends React.Component {
 
     getData = () => {
         axiosWithAuth().get("https://medizen-api.herokuapp.com/api/strains")
-         
           .then(response => {
             this.setState({ strains: response.data });
           });
@@ -71,7 +40,7 @@ class Strains extends React.Component {
       render() {
    
         return (
-            <div class='wrap' >
+            <div className='wrap' >
               <h1>Strains</h1>
                 {this.state.strains.map(strain => 
         <Strain
@@ -91,26 +60,17 @@ class Strains extends React.Component {
       }
     }
 
-    
-    //   id: number,
-    //   strain_id: number,
-    //   strain: string,
-    //   type: string,
-    //   rating: float,
-    //   description: string,
-    //   effects: array,
-    //   flavors: array
-    // }
 
 
 
+const mapStateToProps = (state) => {
+  return {
+  strains: state
+  }
+  }
+  export default connect(mapStateToProps)(Strains);
 
 
-    export default Strains;
-
-
-
-// 
 
 
 

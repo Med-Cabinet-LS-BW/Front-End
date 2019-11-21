@@ -45,12 +45,17 @@ class Treatment extends React.Component {
       <div className="post">
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-          {this.props.treatment.title}
-          </Typography>
           <MoreHorizIcon />
+          <Typography gutterBottom variant="h5" component="h2">
+          Treatment: {this.props.treatment.treatment}
+          Intake Method: {this.props.treatment.intake}
+          Dosage: {this.props.treatment.dosage}
+          Schedule: {this.props.treatment.schedule}
+          Ailments: {this.props.treatment.ailments}
+          </Typography>
+          
           <Typography variant="body2" color="textSecondary" component="p">
-          {this.props.treatment.message}
+          
           </Typography>
         </CardContent>
       </CardActionArea>
