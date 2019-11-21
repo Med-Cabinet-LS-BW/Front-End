@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -65,22 +64,17 @@ const StrainCard = props =>  {
               axiosWithAuth().post('https://medizen-api.herokuapp.com/api/favorites/strains', {
                 strain_id: props.strain_id
               })
-              // .then(response => {
-              //   //console.log(response);
-              // })
-              // .catch(err => {console.log(err)})
+              .then(response => {
+                //console.log(response);
+              })
+              .catch(err => {console.log(err)})
             }}>
           <FavoriteIcon />
         </IconButton>
         }
         title={props.name}
       
-      />
-      {/* <CardMedia
-        className={classes.media}
-        title={props.name}
-      /> */}
-      
+      />      
       <CardContent>
         <Typography paragraph>Type: {props.type[0].toUpperCase() + props.type.slice(1)}</Typography>
 
@@ -106,23 +100,9 @@ const StrainCard = props =>  {
           <Typography paragraph>
             {props.description}
           </Typography>
-          {/* <Typography>
-            Review this strand.
-          </Typography> */}
         </CardContent>
       </Collapse>
     </Card>
   );
 }
 export default StrainCard;
-
-   // {
-    //   id: number,
-    //   strain_id: number,
-    //   strain: string,
-    //   type: string,
-    //   rating: float,
-    //   description: string,
-    //   effects: array,
-    //   flavors: array
-    // }

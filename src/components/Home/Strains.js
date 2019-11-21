@@ -1,39 +1,13 @@
 import React, { Component } from 'react';
 import { Connect } from 'react-redux';
-import Strain from './Strain';
+import Strain from './StrainOLD';
 import axios from 'axios';
 import EditStrain from './EditStrain';
+import StrainCard from './StrainCard';
 
 // TODO    ---- RENAME STRAINCARD FILE TO STRAIN ------
 // TODO    ---- Fix EditStrain element below ------
 // TODO    ---- Uncomment EditStrain import and fix the address ------
-
-
-
-
-// class AllStrains extends Component {
-// render() {
-// return (
-// <div>
-//   <h1 className="post_heading">Strains</h1>
-//   {this.props.strains.map((strain) => (
-//   <div key={strain.id}>
-//     {strain.editing ? <EditComponent strain={strain} key={strain.id} /> : <Strain strain={strain}
-//     key={strain.id} />}
-//   </div>
-// ))}
-// </div>
-// );
-// }
-// }
-
-// const mapStateToProps = (state) => {
-// return {
-// strains: state
-// }
-// }
-// export default connect(mapStateToProps)(AllStrains);
-
 
 const axiosWithAuth = () => {
     return axios.create({
@@ -71,21 +45,22 @@ class Strains extends React.Component {
       render() {
    
         return (
-            <div class='wrap' >
-              <h1>Strains</h1>
+            <div className='strain-cards' >
+              {/* <h1>Strains</h1> */}
                 {this.state.strains.map(strain => 
-        <Strain
+        <StrainCard
         key={strain.strain_id}
-        title={strain.strain}
+        strain_id={strain.strain_id}
+        name={strain.strain}
         type={strain.type}
         effects={strain.effects}
         flavor={strain.flavors}
         description={strain.description}> 
-        {strain.editing ? 
+        {/* {strain.editing ? 
         // Change this Element below to <EditStrain>
         <EditStrain strain={strain} key={strain.id}/> 
-        : <Strain strain={strain} key={strain.id} />}   
-           </Strain> )} 
+        : <Strain strain={strain} key={strain.id} />}    */}
+           </StrainCard> )} 
             </div>
         )
       }

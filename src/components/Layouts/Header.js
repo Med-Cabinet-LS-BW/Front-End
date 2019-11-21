@@ -2,24 +2,11 @@ import React, { useEffect, useState } from 'react';
 import  { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { NavLink, Redirect } from 'react-router-dom';
 
-//let isLoggedIn = false;
-
-
 function Header () {
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem('token') ? true : false
   );
-
-  // if (localStorage.getItem('token')) {
-  //   setIsLoggedIn(true);
-  // }
-
-  // useEffect(() => {
-  //   if (!localStorage.getItem('token')) {
-  //     setIsLoggedIn(true);
-  //   }
-  // })
 
     return (
         <AppBar position="static">
@@ -31,7 +18,7 @@ function Header () {
           {isLoggedIn 
           ?
           <nav>
-            {console.log(isLoggedIn)}
+            {/* {console.log(isLoggedIn)} */}
             <NavLink onClick={() => {
               setIsLoggedIn(false);
               localStorage.removeItem('token');
@@ -39,7 +26,7 @@ function Header () {
           </nav>
           :
           <nav>
-            {console.log(isLoggedIn)}
+            {/* {console.log(isLoggedIn)} */}
             <NavLink className='nav-links' to='/register'>Register</NavLink>
             <NavLink className='nav-links' to='/login'>Login</NavLink>
           </nav>

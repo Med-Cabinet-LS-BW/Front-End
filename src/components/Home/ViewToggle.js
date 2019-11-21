@@ -22,12 +22,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Types from '../Filter/Types';
 import Tastes from '../Filter/Tastes';
 import Effects from '../Filter/Effects';
+import Favorites from "../Strain/Favorites";
 import Treatments from '../Treatments/TreatmentPlans';
-
-
-
-
-
 
 function ViewToggle(props) {
   const { children, value, index, ...other } = props;
@@ -130,7 +126,7 @@ export default function FullWidthTabs() {
             <Strains /> 
         </ViewToggle>
         <ViewToggle value={value} index={1} dir={theme.direction}>
-          Favorites
+          <Favorites />
         </ViewToggle>
        {/* <ViewToggle value={value} index={2} dir={theme.direction}>
           <Treatments/>

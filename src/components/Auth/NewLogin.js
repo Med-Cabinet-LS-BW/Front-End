@@ -13,7 +13,7 @@ const NewLogin = ({values, errors, touched, status}) => {
 
     return (
         <div>
-         {status ? <Redirect to={{ pathname: "/Strains" }} /> : 
+         {status ? <Redirect to={{ pathname: "/StrainList" }} /> : 
          <> 
           <h2>Login Below</h2>  
       <Form>
@@ -44,6 +44,7 @@ const FormikNewLogin = withFormik({
     axios.post("https://medizen-api.herokuapp.com/api/auth/login", values)
     .then(response => {
       localStorage.setItem("token", response.data.token);
+      //console.log(response.data.token);
       setStatus(response.data);
       let isLoggedIn = true;
     })

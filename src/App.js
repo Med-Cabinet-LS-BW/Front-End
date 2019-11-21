@@ -15,7 +15,7 @@ const  App = () => {
     <div>
       <Header />
       <Switch>
-          <PrivateRoute path="/Strains">
+          <PrivateRoute path="/StrainList">
             <ViewToggle />
           </PrivateRoute>
           <Route path="/login" component={NewLogin} />

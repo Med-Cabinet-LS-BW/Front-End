@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import axios from 'axios';
-import StrainCard from "../HomePage/StrainCard";
+import StrainCard from "../Home/StrainCard";
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-const Favorites = (props) => {
+const Favorites = (props) => {  
 
   const axiosWithAuth = () => {
     return axios.create({
