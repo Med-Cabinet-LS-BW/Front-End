@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import Strains from './Strains';
+import Strains from '../Strain/Strains';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { Link } from 'react-router-dom';

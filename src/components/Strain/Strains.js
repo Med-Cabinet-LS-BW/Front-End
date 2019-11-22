@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Strain from './Strain';
 import axios from 'axios';
-import EditStrain from './EditStrain';
+import EditStrain from '../Actions/EditStrain';
 
 
 const axiosWithAuth = () => {

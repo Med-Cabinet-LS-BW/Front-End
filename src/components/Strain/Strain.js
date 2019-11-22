@@ -21,8 +21,9 @@ import axiosWithAuth from '../Auth/AxiosWithAuth';
 
 const useStyles = makeStyles(theme => ({
     card: {
-      width: 345,
-      margin: 50
+      width: 320,
+      height: 300,
+      margin: 20
     },
     media: {
       height: 0,

@@ -50,14 +50,17 @@
 
 .Form {
   margin: 0 auto;
+  padding: 200px;
 }
 
 .PrimaryBtn {
   margin: 0 auto;
 }
 
-.Input {
+.input {
   margin: 0 auto;
+  height: 100px;
+  width: 60%;
 }
 
 .AppBar {

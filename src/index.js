@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from "./App";
 import * as serviceWorker from './serviceWorker';
-import Reducer from './components/Filter/strainReducer';
+import Reducer from '../src/components/Reducer/strainReducer';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';

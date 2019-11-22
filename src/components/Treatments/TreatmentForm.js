@@ -61,7 +61,7 @@ class TreatmentForm extends Component {
       <form className="Form" onSubmit={this.handleSubmit} 
       >
         <h3>Ailment</h3>
-       <TextField required type="text" ref={(input) => this.getTreatment = input}
+       <input required type="text" ref={(input) => this.getTreatment = input}
        placeholder="" /><br /><br />
        <h3>Intake Schedule</h3>
         <input className="Input" required type="text" ref={(input) => this.getIntake = input}
