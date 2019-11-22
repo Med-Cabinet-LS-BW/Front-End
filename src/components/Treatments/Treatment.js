@@ -13,19 +13,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 
-
-
-
-//   </div>
-// </div>
-// );
-// }
-// }
-// export default connect()(Treatment);
-
-
-
-
 const useStyles = makeStyles({
   card: {
     maxWidth: 345,
@@ -41,25 +28,31 @@ class Treatment extends React.Component {
 
   render () {
   return (
-    <Card className="card">
-      <div className="post">
+    <Card className="TreatmentCard">
+      <div>
       <CardActionArea>
         <CardContent>
+          // TODO --- MAKE THIS MORE ICON REVEAL TWO MORE ICONS
           <MoreHorizIcon />
           <Typography gutterBottom variant="h5" component="h2">
           Treatment: {this.props.treatment.treatment}
-          Intake Method: {this.props.treatment.intake}
-          Dosage: {this.props.treatment.dosage}
-          Schedule: {this.props.treatment.schedule}
-          Ailments: {this.props.treatment.ailments}
           </Typography>
-          
-          <Typography variant="body2" color="textSecondary" component="p">
-          
+          <Typography>
+          Intake Method: {this.props.treatment.intake}
+          </Typography>
+          <Typography>
+          Dosage: {this.props.treatment.dosage}
+          </Typography>
+          <Typography>
+          Schedule: {this.props.treatment.schedule}
+          </Typography>
+          <Typography>
+          Ailments: {this.props.treatment.ailments}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
+        // TODO --- CHANGE THESE BUTTONS TO A TRASH AND A PENCIL ICON THAT UNFOLDS FROM 'MORE' ABOVE
         <Button className="edit" size="small" color="primary"
         onClick={() => this.props.dispatch({ type: 'EDIT_TREATMENT', id: this.props.treatment.id })}
         >

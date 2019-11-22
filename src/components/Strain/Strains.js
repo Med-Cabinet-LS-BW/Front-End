@@ -28,23 +28,23 @@ class Strains extends React.Component {
         }
       }
 
-
     getData = () => {
         axiosWithAuth().get("https://medizen-api.herokuapp.com/api/strains")
           .then(response => {
             this.setState({ strains: response.data });
           });
       }
-    
-    
       render() {
    
         return (
+        <>
+        <h1 className="Heading">Strains</h1>
             <div className='wrap' >
-              <h1>Strains</h1>
+              
                 {this.state.strains.map(strain => 
         <Strain
         key={strain.strain_id}
+        strain_id={strain.strain_id}
         title={strain.strain}
         type={strain.type}
         effects={strain.effects}
@@ -56,12 +56,10 @@ class Strains extends React.Component {
         : <Strain strain={strain} key={strain.id} />}   
            </Strain> )} 
             </div>
+            </>
         )
       }
     }
-
-
-
 
 const mapStateToProps = (state) => {
   return {

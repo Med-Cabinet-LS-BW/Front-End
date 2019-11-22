@@ -4,14 +4,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { green } from '@material-ui/core/colors';
 import TextField from '@material-ui/core/TextField';
+import axiosWithAuth from '../Auth/AxiosWithAuth';
+import axios from 'axios';
 
-{/* <TextField
-          id="outlined-basic"
-          className={classes.textField}
-          label="Outlined"
-          margin="normal"
-          variant="outlined"
-        /> */}
 
 const theme = createMuiTheme({
   palette: {
@@ -40,38 +35,47 @@ class TreatmentForm extends Component {
    ailments,
    editing: false
   }
-  this.props.dispatch({
-   type: 'ADD_TREATMENT',
-   data
-   })
+  const ADD_TREATMENT = 'ADD_TREATMENT';
+  axios
+    .post('https://medizen-api.herokuapp.com/api/treatments')
+    .then(res =>
+    this.props.dispatch({
+    type: ADD_TREATMENT,
+    data
+   }))
    this.getTreatment.value = '';
    this.getIntake.value = '';
    this.getDosage.value = '';
    this.getSchedule.value = '';
    this.getAilments.value = '';
+
+  
+
+
   }
 
   render() {
     return (
-    <div className="treat-container">
-      <h2 className="treat_heading">Treatment Plan</h2>
-      <form className="TreatForm" onSubmit={this.handleSubmit} >
+    <div>
+      <h2 className="Heading">Treatment Plan</h2>
+      <form className="Form" onSubmit={this.handleSubmit} 
+      >
         <h3>Ailment</h3>
        <TextField required type="text" ref={(input) => this.getTreatment = input}
        placeholder="" /><br /><br />
        <h3>Intake Schedule</h3>
-        <input required type="text" ref={(input) => this.getIntake = input}
+        <input className="Input" required type="text" ref={(input) => this.getIntake = input}
        placeholder="" /><br /><br />
        <h3>Dosage</h3>
-        <input required type="text" ref={(input) => this.getDosage = input}
+        <input className="Input" required type="text" ref={(input) => this.getDosage = input}
        placeholder="" /><br /><br />
        <h3>Shcedule</h3>
-        <input required type="text" ref={(input) => this.getSchedule = input}
+        <input className="Input" required type="text" ref={(input) => this.getSchedule = input}
        placeholder="" /><br /><br />
        <h3>Ailment Description</h3>
-       <textarea required rows="5" ref={(input) => this.getAilments = input}
+       <textarea className="Input" required rows="5" ref={(input) => this.getAilments = input}
        cols="28" placeholder="Ailment Description" /><br /><br />
-       <button color="primary">Add Treatment</button>
+       <button className="PrimaryBtn">Add Treatment</button>
       </form>
     </div>
     );

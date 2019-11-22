@@ -5,6 +5,9 @@ import EditTreatment from './EditTreatment';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { green } from '@material-ui/core/colors';
+import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+
 
 
 const theme = createMuiTheme({
@@ -18,14 +21,18 @@ const theme = createMuiTheme({
 });
 
 class TreatmentPlans extends Component {
+
+  
   render () {
     return (
       <div>
+
     {this.props.treatments.map((treatment) => (
-        <div className="wrap" key={treatment.id}>
+        <CardContent className="TreatmentCard" key={treatment.id}>
           {treatment.editing ? <EditTreatment treatment={treatment} key={treatment.id} /> : <Treatment treatment={treatment}
           key={treatment.id} />}
-        </div>
+          <IconButton></IconButton>
+        </CardContent>
     ))}
    </div> )
   }

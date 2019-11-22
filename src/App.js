@@ -16,7 +16,7 @@ const  App = () => {
   return(
     <Router>
       <ThemeProvider theme={theme}>
-        <div>
+        <div className='wrap'>
           <Header />
             <Switch>
                 <PrivateRoute path="/Strains">

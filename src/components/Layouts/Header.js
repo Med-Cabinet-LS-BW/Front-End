@@ -1,19 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import  { AppBar, Toolbar, Typography } from '@material-ui/core';
-
-
 import { NavLink, Redirect } from 'react-router-dom';
-
-
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: green[600] }, // Purple and green play nicely together.
-    secondary: { main: grey[50] }, // This is just green.A700 as hex.
-  },
-  typography: {
-    fontFamily: 'quicksand'
-  },
-});
 
 function Header () {
 
@@ -21,19 +8,17 @@ function Header () {
     localStorage.getItem('token') ? true : false
   );
 
- 
     return (
-      <ThemeProvider>
-        <AppBar color="primary" position="static">
-        <Toolbar>
+        <AppBar  position="static">
+        <Toolbar className="AppBar">
           
           <Typography variant="h6" >
             MediZen
           </Typography>
-          {isLoggedIn 
+          {isLoggedIn   
           ?
           <nav>
-            {console.log(isLoggedIn)}
+           
             <NavLink onClick={() => {
               setIsLoggedIn(false);
               localStorage.removeItem('token');
@@ -41,14 +26,12 @@ function Header () {
           </nav>
           :
           <nav>
-            {console.log(isLoggedIn)}
             <NavLink className='nav-links' to='/register'>Register</NavLink>
             <NavLink className='nav-links' to='/login'>Login</NavLink>
           </nav>
           }
         </Toolbar>
       </AppBar>
-    </ThemeProvider>
     )
       
   }

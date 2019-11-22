@@ -1,9 +1,9 @@
-import React from 'react';
-import axios from "axios";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { FormControlLabel, CardHeader,  } from '@material-ui/core';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,14 +11,17 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import Checkbox from '@material-ui/core/Checkbox';
+import { green } from '@material-ui/core/colors';
+import  FavoriteIcon  from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import axios from 'axios';
+import axiosWithAuth from '../Auth/AxiosWithAuth';
 
 
 const useStyles = makeStyles(theme => ({
     card: {
-      width: 300,
+      width: 345,
       margin: 50
     },
     media: {
@@ -36,39 +39,56 @@ const useStyles = makeStyles(theme => ({
       transform: 'rotate(180deg)',
     },
     avatar: {
-      backgroundColor: red[500],
+      backgroundColor: green[500],
     },
   }));
 
-const StrainCard = props =>  {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
 
-  const axiosWithAuth = () => {
-    return axios.create({
-        headers: {
-            authorization: localStorage.getItem("token")
-        }
-    });
-  };
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const Strain = props =>  {
+    
+    const classes = useStyles();
+    const [expanded, setExpanded] = React.useState(false);
 
-  return (
-    <Card className={classes.card}>
-      {/* {console.log(props)} */}
+    const handleExpandClick = () => {
+      setExpanded(!expanded);
+    };
+
+
+ const handleSubmit = (e) => {
+    e.preventDefault();
+     const title = this.getTitle.value;
+     const message = this.getMessage.value;
+     const data = {
+      id: new Date(),
+      title,
+      message,
+      editing: false
+     }
+     this.props.dispatch({
+     type: 'ADD_STRAIN',
+     data
+     })
+     this.getTitle.value = '';
+     this.getMessage.value = '';
+    }
+
+   
+
+return (
+
+<Card className={classes.card}>
+      {console.log(props)}
       <CardHeader
         action={
           <IconButton aria-label="add to favorites"  onClick={()=> {
               axiosWithAuth().post('https://medizen-api.herokuapp.com/api/favorites/strains', {
                 strain_id: props.strain_id
               })
-              // .then(response => {
-              //   //console.log(response);
-              // })
-              // .catch(err => {console.log(err)})
+              .then(response => {
+                console.log(response);
+              })
+              .catch(err => {console.log(err)})
             }}>
           <FavoriteIcon />
         </IconButton>
@@ -76,15 +96,13 @@ const StrainCard = props =>  {
         title={props.name}
       
       />
-      {/* <CardMedia
-        className={classes.media}
-        title={props.name}
-      /> */}
+     
       
       <CardContent>
-        <Typography paragraph>Type: {props.type[0].toUpperCase() + props.type.slice(1)}</Typography>
-
-        <Typography paragraph>{`Effects: ${props.effects.join(', ')}`}</Typography>
+        <Typography paragraph>Type: {props.type}</Typography>
+        <Typography paragraph>Effects: {props.effects.map(element => {
+          return `${element} `
+        })}</Typography>
       </CardContent>
       <CardActions disableSpacing>
           <Avatar aria-label="strain">
@@ -102,27 +120,22 @@ const StrainCard = props =>  {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{`Flavor: ${props.flavor.join(', ')}`} </Typography>
+        <Typography paragraph>Flavor: {
+          props.flavor.map(element => {
+            return `${element} `
+          })
+        }</Typography>
           <Typography paragraph>
             {props.description}
           </Typography>
-          {/* <Typography>
-            Review this strand.
-          </Typography> */}
+         
         </CardContent>
       </Collapse>
     </Card>
-  );
-}
-export default StrainCard;
+)
+  }
 
-   // {
-    //   id: number,
-    //   strain_id: number,
-    //   strain: string,
-    //   type: string,
-    //   rating: float,
-    //   description: string,
-    //   effects: array,
-    //   flavors: array
-    // }
+  export default connect()(Strain);
+
+
+

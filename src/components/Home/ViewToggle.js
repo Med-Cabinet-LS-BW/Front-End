@@ -140,7 +140,7 @@ export default function FullWidthTabs() {
           <TreatmentPlans/>
         </ViewToggle>
         <ViewToggle className= "ViewToggle" value={value} index={3} dir={theme.direction}>
-            <Effects /> 
+            {/* <Effects />  */}
         </ViewToggle>
       </SwipeableViews>
       </ThemeProvider>
