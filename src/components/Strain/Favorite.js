@@ -20,6 +20,16 @@ import FormGroup from "@material-ui/core/FormGroup";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 
+// const GreenCheckbox = withStyles({
+//   root: {
+//     color: green[400],
+//     '&$checked': {
+//       color: green[600],
+//     },
+//   },
+//   checked: {},
+// })(props => <Checkbox color="default" {...props} />);
+
 const useStyles = makeStyles(theme => ({
   card: {
     width: 350,
@@ -40,6 +50,12 @@ const useStyles = makeStyles(theme => ({
   },
   expandOpen: {
     // transform: 'rotate(180deg)',
+  },
+  avatar: {
+    backgroundColor: green[500]
+  },
+  text: {
+    color: orange[50]
   }
 }));
 
@@ -53,17 +69,18 @@ const HeartCheckbox = withStyles({
   checked: {}
 })(props => <Checkbox color="default" {...props} />);
 
-const Strain = props => {
+const FavoriteStrain = props => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,
     checkedF: true,
-    checkedG: true
+    checkedG: true,
+    checkedH: true
   });
 
-  const handleChange = (name, checkedH) => event => {
+  const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
   };
   const handleExpandClick = () => {
@@ -72,17 +89,18 @@ const Strain = props => {
 
   return (
     <Card className={classes.card}>
+      {props.strain_id}
       <CardHeader
         action={
           <FormControlLabel
             control={
               <HeartCheckbox
-                onClick={() => {
+                onClick={favorite_id => {
                   axiosWithAuth()
-                    .post(
-                      "https://medizen-api.herokuapp.com/api/favorites/strains",
+                    .delete(
+                      `https://medizen-api.herokuapp.com/api/favorites/strains/${props.favorite_id}`,
                       {
-                        strain_id: props.strain_id
+                        favorite_id: !favorite_id
                       }
                     )
                     .then(response => {
@@ -92,32 +110,30 @@ const Strain = props => {
                       console.log(err);
                     });
                 }}
-                icon={<FavoriteBorder />}
-                checkedIcon={
+                icon={
                   <Favorite
                     checked={state.checkedH}
                     onChange={handleChange("checkedH")}
                   />
                 }
+                checkedIcon={<FavoriteBorder />}
               />
             }
           ></FormControlLabel>
         }
         title={props.title}
-        subheader={`Type:${props.type}`}
-      ></CardHeader>
-      {
-        <CardContent>
-          <Typography>Type: {props.type}</Typography>
-          <Typography>
-            {" "}
-            Effects:{" "}
-            {props.effects.map(element => {
-              return `${element} `;
-            })}
-          </Typography>
-        </CardContent>
-      }
+        subheader={
+          <CardContent>
+            <Typography>Type: {props.type}</Typography>
+            <Typography>
+              {" "}
+              Effects:{" "}
+              {props.effects.map(element => {
+                return `${element} `;
+              })}
+            </Typography>
+          </CardContent>
+        }
       />
       <CardActions disableSpacing>
         <Typography
@@ -147,4 +163,4 @@ const Strain = props => {
   );
 };
 
-export default connect()(Strain);
+export default connect()(FavoriteStrain);

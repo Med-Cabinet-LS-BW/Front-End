@@ -1,39 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import  { AppBar, Toolbar, Typography } from '@material-ui/core';
-import { NavLink, Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { NavLink, Redirect } from "react-router-dom";
 
-function Header () {
-
+function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem('token') ? true : false
+    localStorage.getItem("token") ? true : false
   );
 
-    return (
-        <AppBar  position="static">
+  return (
+    <AppBar position="static">
+      <div>
         <Toolbar className="AppBar">
-          
-          <Typography variant="h6" >
-            MediZen
-          </Typography>
-          {isLoggedIn   
-          ?
-          <nav>
-           
-            <NavLink onClick={() => {
-              setIsLoggedIn(false);
-              localStorage.removeItem('token');
-            }} to="/login">Logout</NavLink>
-          </nav>
-          :
-          <nav>
-            <NavLink className='nav-links' to='/register'>Register</NavLink>
-            <NavLink className='nav-links' to='/login'>Login</NavLink>
-          </nav>
-          }
+          <NavLink className="HomeBtn" to="/home">
+            <h1>MediZen</h1>
+          </NavLink>
+          {isLoggedIn ? (
+            <nav className="nav">
+              <NavLink
+                onClick={() => {
+                  setIsLoggedIn(false);
+                  localStorage.removeItem("token");
+                }}
+                to="/login"
+              >
+                Logout
+              </NavLink>
+              <NavLink to="/strains">Discover</NavLink>
+            </nav>
+          ) : (
+            <nav className="nav">
+              <NavLink to="/about">About</NavLink>
+              <NavLink to="/login">Login</NavLink>
+            </nav>
+          )}
         </Toolbar>
-      </AppBar>
-    )
-      
-  }
-  
-export default Header 
+      </div>
+    </AppBar>
+  );
+}
+
+export default Header;

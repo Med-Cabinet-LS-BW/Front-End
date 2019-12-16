@@ -3,66 +3,166 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 60vmin;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
 .App-link {
-  color: #09d3ac;
+  color: #3d8f6d;
 }
 
 .AppBar {
-  background: green;
+  background-color: #3d8f6d;
+}
+
+.TitleBar {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .wrap {
-  margin: 0 auto;
+  margin: 40;
   display: flex;
   flex-wrap: wrap;
-  background-color: rgb(214, 212, 212);
+  justify-content: center;
+  background-color: whitesmoke;
 }
 
+.wrapChecks {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  background-color: whitesmoke;
+}
+
+.Heading {
+  margin-left: 20px;
+}
+
+.Row {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.column {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+h3 {
+  margin: 0 auto;
+}
+
+.HomeBtn {
+  text-decoration: none;
+  color: white;
+}
+
+.PrimaryBtn {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 2vh;
+  font-family: quicksand;
+  color: white;
+  padding: 10px;
+  width: 70%;
+  border-radius: 1vh;
+  background-color: #3d8f6d;
+}
+
+.FilterBtn {
+  background-color: #3d8f6d;
+  width: 100%;
+}
+
+.Filters {
+  margin: 0 auto;
+  height: 100%;
+  width: 98%;
+  margin-top: 200px;
+}
+
+.Form {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 30px;
+}
+
+.Input {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  height: 35px;
+  width: 70%;
+  border-radius: 0.5vh;
+  border: 1px solid lightgrey;
+}
+
+.label {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  font-size: 20px;
+}
+.TreatForm {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
+}
+
+.TreatInput {
+  margin: 0 auto;
+  padding: 10px;
+  width: 100%;
+  border-radius: 0.5vh;
+  border: 1px solid grey;
+}
 .treatments {
   margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  min-width: max-content;
   width: 100%;
-  height: 100%;
-  
-  padding: 50px;
-  border: 1px solid grey;
-}
-
-.Heading {
-  margin: 0 auto;
-}
-
-.Form {
-  margin: 0 auto;
-  padding: 200px;
-}
-
-.PrimaryBtn {
-  margin: 0 auto;
-}
-
-.input {
-  margin: 0 auto;
-  height: 100px;
-  width: 60%;
-}
-
-.AppBar {
-  background-color: green;
+  border: 1px solid lightgrey;
 }
