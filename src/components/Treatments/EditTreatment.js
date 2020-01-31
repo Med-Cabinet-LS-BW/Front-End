@@ -22,7 +22,7 @@ handleEdit = (e) => {
 render() {
 return (
 <div key={this.props.treatment.id} className="post">
-  <form className="form" onSubmit={this.handleEdit}>
+  <form className="Form" onSubmit={this.handleEdit}>
     <input required type="text" ref={(input) => this.getTreatment = input}
     defaultValue={this.props.treatment.treatment} placeholder="Enter Treatment Title" /><br /><br />
     <input required type="text" ref={(input) => this.getIntake = input}

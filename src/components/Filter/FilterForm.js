@@ -24,7 +24,7 @@ const theme = createMuiTheme({
   },
 });
 
-class TreatmentForm extends Component {
+class Filter extends Component {
   handleSubmit = (e) => {
   e.preventDefault();
   const treatment = this.getTreatment.value;
@@ -78,7 +78,7 @@ class TreatmentForm extends Component {
     );
     }
     }
-export default connect()(TreatmentForm);
+export default connect()(Filter);
 
 
 

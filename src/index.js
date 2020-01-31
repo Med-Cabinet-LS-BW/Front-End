@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from "./App";
 import * as serviceWorker from './serviceWorker';
-import Reducer from './components/Filter/strainReducer';
+import Reducer from '../src/components/Reducer/strainReducer';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { green } from '@material-ui/core/colors/green';
+import logger from 'redux-logger';
 
-const store = createStore(Reducer)
+
+const store = createStore(Reducer, applyMiddleware(logger))
 const theme = createMuiTheme({
     palette: {
         primary: green

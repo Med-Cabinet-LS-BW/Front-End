@@ -1,37 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import FavoriteStrain from './Favorite';
 import axios from 'axios';
-import StrainCard from "../HomePage/StrainCard";
+import EditStrain from '../Actions/EditStrain';
+import CustomizedExpansionPanels from '../Filter/ExpansionPanel';
+import { Button } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
-    card: {
-      maxWidth: 300,
-      height: '1%',
-      margin: '10%',
-    },
-    media: {
-      height: 0,
-      paddingTop: '8%', // 16:9
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.longest,
-      }),
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
-    },
-    avatar: {
-      color: green,
-    },
-  }));
 
-const Favorites = (props) => {
 
-  const axiosWithAuth = () => {
+const axiosWithAuth = () => {
     return axios.create({
         headers: {
             authorization: localStorage.getItem("token")
@@ -39,30 +16,70 @@ const Favorites = (props) => {
     });
 };
 
-    const [strains, setStrains] = useState([])
+class Strains extends React.Component {
+        state = {
+        strains: []
+      }
+    
+    
+    componentDidMount() {
+        this.getData();
+        if (!localStorage.getItem("token")) {
+          console.error("Please Login!!!");
+        } else {
+          console.info("We are logged in");
+        }
+      }
 
-    useEffect(() => {
-      axiosWithAuth().get('https://medizen-api.herokuapp.com/api/favorites/strains')
-      .then(response => {
-        //console.log(response);
-        setStrains(response.data);
-      })
-      .catch(err => {console.log('no data returned', err)});
-    }, [])
-
-    return (
-        <div className="strain-cards">
-            {strains.map(strain =>
-            <StrainCard
-              key={strain.strain_id}
-              name={strain.strain}
-              type={strain.type}
-              effects={strain.effects}
-              flavor={strain.flavors}
-              description={strain.description}
-              />)}
+    getData = () => {
+        axiosWithAuth().get("https://medizen-api.herokuapp.com/api/favorites/strains")
+          .then(response => {
+            this.setState({ strains: response.data });
+            console.log(response);
+          });
+      }
+      render() {
+   
+        return (
+        <>
+        <div className="Row">
+        <h1 className="Heading">Favorites</h1>
+    
         </div>
-    )
-}
+        <CustomizedExpansionPanels/>
+            <div className='wrap' >
+              
+                {this.state.strains.map(strain => 
+        <FavoriteStrain
+        favorite_id={strain.favorite_id}
+        key={strain.strain_id}
+        title={strain.strain}
+        type={strain.type}
+        effects={strain.effects}
+        flavor={strain.flavors}
+        description={strain.description}
+        is_favorite= {true}> 
+           </FavoriteStrain> )} 
+            </div>
+            </>
+        )
+      }
+    }
 
-export default Favorites;
+const mapStateToProps = (state) => {
+  return {
+  strains: state
+  }
+  }
+  export default connect(mapStateToProps)(Strains);
+
+
+
+
+
+
+
+
+
+
+ 

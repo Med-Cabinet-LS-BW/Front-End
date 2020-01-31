@@ -1,56 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import  { AppBar, Toolbar, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from "react";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { NavLink, Redirect } from "react-router-dom";
 
-
-import { NavLink, Redirect } from 'react-router-dom';
-
-
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: green[600] }, // Purple and green play nicely together.
-    secondary: { main: grey[50] }, // This is just green.A700 as hex.
-  },
-  typography: {
-    fontFamily: 'quicksand'
-  },
-});
-
-function Header () {
-
+function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem('token') ? true : false
+    localStorage.getItem("token") ? true : false
   );
 
- 
-    return (
-      <ThemeProvider>
-        <AppBar color="primary" position="static">
-        <Toolbar>
-          
-          <Typography variant="h6" >
-            MediZen
-          </Typography>
-          {isLoggedIn 
-          ?
-          <nav>
-            {console.log(isLoggedIn)}
-            <NavLink onClick={() => {
-              setIsLoggedIn(false);
-              localStorage.removeItem('token');
-            }} to="/login">Logout</NavLink>
-          </nav>
-          :
-          <nav>
-            {console.log(isLoggedIn)}
-            <NavLink className='nav-links' to='/register'>Register</NavLink>
-            <NavLink className='nav-links' to='/login'>Login</NavLink>
-          </nav>
-          }
+  return (
+    <AppBar position="static">
+      <div>
+        <Toolbar className="AppBar">
+          <NavLink className="HomeBtn" to="/home">
+            <h1>MediZen</h1>
+          </NavLink>
+          {isLoggedIn ? (
+            <nav className="nav">
+              <NavLink
+                onClick={() => {
+                  setIsLoggedIn(false);
+                  localStorage.removeItem("token");
+                }}
+                to="/login"
+              >
+                Logout
+              </NavLink>
+              <NavLink to="/strains">Discover</NavLink>
+            </nav>
+          ) : (
+            <nav className="nav">
+              <NavLink to="/about">About</NavLink>
+              <NavLink to="/login">Login</NavLink>
+            </nav>
+          )}
         </Toolbar>
-      </AppBar>
-    </ThemeProvider>
-    )
-      
-  }
-  
-export default Header 
+      </div>
+    </AppBar>
+  );
+}
+
+export default Header;
